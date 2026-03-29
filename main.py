@@ -1,7 +1,14 @@
 import folium
 
-# 1. Create the base map (Light Mode by default)
-my_map = folium.Map(location=[48.5, 10.5], zoom_start=7, tiles="OpenStreetMap", control_scale=True)
+# 1. Create the base map
+attributionControl=False
+my_map = folium.Map(
+    location=[48.5, 10.5],
+    zoom_start=7,
+    tiles="OpenStreetMap",
+    control_scale=True,
+    attributionControl=False
+)
 
 # Headquarters coordinates
 porsche_coords = [48.8350, 9.1526]
@@ -34,7 +41,7 @@ folium.PolyLine(
 # 5. Draw a Buffer Zone (50 km radius around Munich)
 folium.Circle(
     location=bmw_coords,
-    radius=50000, # Radius in meters
+    radius=50000,
     color="green",
     fill=True,
     fill_opacity=0.2,
@@ -42,9 +49,9 @@ folium.Circle(
 ).add_to(my_map)
 
 # 6. Add Dark Mode layer and Layer Control tool
-folium.TileLayer('cartodbdark_matter', name="Dark Mode").add_to(my_map)
+folium.TileLayer('cartodbdark_matter', name="Dark Mode", control=False).add_to(my_map)
 folium.LayerControl().add_to(my_map)
 
 # 7. Save the map to an HTML file
 my_map.save("First_map_code.html")
-print("Map is ready! Open porsche_bmw_map.html in your browser.")
+print("Success! The safe map is ready. Open First_map_code.html to check.")
